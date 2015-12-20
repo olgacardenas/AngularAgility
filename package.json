@@ -1,6 +1,6 @@
 {
   "name": "angular-agility",
-  "version": "0.8.28",
+  "version": "0.8.29",
   "dependencies": {
     "angular": ">=1.2.0"
   },
@@ -55,7 +55,7 @@
     "dirty",
     "changed",
     "select2",
-    "notificaiton",
+    "notification",
     "growl"
   ],
   "author": "John Culviner",

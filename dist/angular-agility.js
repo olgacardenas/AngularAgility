@@ -1,5 +1,5 @@
 /*
-angular-agility "version":"0.8.28" @ 2015-07-06T15:31:48
+angular-agility "version":"0.8.29" @ 2015-12-20T18:15:44
 Copyright (c) 2014 - John Culviner
 Licensed under the MIT license
 */
@@ -1014,13 +1014,11 @@ angular
           '<i class="fa fa-times fa-stack-1x fa-inverse"></i>' +
           '</span>' +
           '</div>' +
-          '<strong>There are some validation errors: </strong>' +
-          '<ul>' +
-          '<li ng-repeat="error in notification.validationErrorsToDisplay()">' +
+          '<span ng-repeat="error in notification.validationErrorsToDisplay()">' +
           '{{ error.message }}&nbsp;' +
           '<a href="" title="Focus Field" ng-show="error.field" ng-click="notification.showField(error)"><i class="fa fa-search"></i></a>' +
-          '</li>' +
-          '</ul>' +
+          '<span ng-hide="$last">&nbsp;/&nbsp;</span>' +
+          '</span>' +
           '</div>',
         options: {
           ttl: 0, //forever until manually removed by form extensions

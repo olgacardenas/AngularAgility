@@ -25,13 +25,11 @@
           '<i class="fa fa-times fa-stack-1x fa-inverse"></i>' +
           '</span>' +
           '</div>' +
-          '<strong>There are some validation errors: </strong>' +
-          '<ul>' +
-          '<li ng-repeat="error in notification.validationErrorsToDisplay()">' +
+          '<span ng-repeat="error in notification.validationErrorsToDisplay()">' +
           '{{ error.message }}&nbsp;' +
           '<a href="" title="Focus Field" ng-show="error.field" ng-click="notification.showField(error)"><i class="fa fa-search"></i></a>' +
-          '</li>' +
-          '</ul>' +
+          '<span ng-hide="$last">&nbsp;/&nbsp;</span>' +
+          '</span>' +
           '</div>',
         options: {
           ttl: 0, //forever until manually removed by form extensions
