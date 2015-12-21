@@ -236,7 +236,7 @@
       };
 
       this.valMsgForTemplate = '<div class="validation-errors">' +
-        '<div class="validation-error" ng-show="showMessages" ng-repeat="msg in errorMessages">{{msg}}</div>' +
+        '<div class="validation-error" ng-show="showMessages" ng-repeat="msg in errorMessages|limitTo:1">{{msg}}</div>' +
         '<div class="notch notch-border"></div>' +
         '<div class="notch"></div>' +
         '</div>';

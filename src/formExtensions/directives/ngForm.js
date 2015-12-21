@@ -456,7 +456,7 @@
               }, function () {
 
                 //should validation errors be displayed?
-                var shouldDisplay = form.$invalid && form.$dirty;
+                var shouldDisplay = form.$invalid;
 
                 //not yet... check to see if any fields have and reasons
                 //if there isnt a field then the error must show up

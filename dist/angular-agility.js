@@ -1,5 +1,5 @@
 /*
-angular-agility "version":"0.8.30" @ 2015-12-20T19:34:59
+angular-agility "version":"0.8.31" @ 2015-12-21T09:59:38
 Copyright (c) 2014 - John Culviner
 Licensed under the MIT license
 */
@@ -1412,7 +1412,7 @@ angular
       };
 
       this.valMsgForTemplate = '<div class="validation-errors">' +
-        '<div class="validation-error" ng-show="showMessages" ng-repeat="msg in errorMessages">{{msg}}</div>' +
+        '<div class="validation-error" ng-show="showMessages" ng-repeat="msg in errorMessages|limitTo:1">{{msg}}</div>' +
         '<div class="notch notch-border"></div>' +
         '<div class="notch"></div>' +
         '</div>';
@@ -2715,7 +2715,7 @@ angular
               }, function () {
 
                 //should validation errors be displayed?
-                var shouldDisplay = form.$invalid && form.$dirty;
+                var shouldDisplay = form.$invalid;
 
                 //not yet... check to see if any fields have and reasons
                 //if there isnt a field then the error must show up
