@@ -1,5 +1,5 @@
 /*
-angular-agility "version":"0.8.29" @ 2015-12-20T18:15:44
+angular-agility "version":"0.8.30" @ 2015-12-20T19:34:59
 Copyright (c) 2014 - John Culviner
 Licensed under the MIT license
 */
@@ -1007,7 +1007,7 @@ angular
       //register a notifyConfig to be used by default for displaying validation errors in forms
       //**if this doesn't work for you by all means register a new one with the same key!**
       aaNotifyConfigProvider.addOrUpdateNotifyConfig('aaFormExtensionsValidationErrors', {
-        template: '<div class="alert alert-danger aa-form-extensions-validation-errors">' +
+        template: '<div class="alert alert-danger aa-form-extensions-validation-errors" ng-show="notification.validationErrorsToDisplay().length>0">' +
           '<div class="pull-right aa-notify-close" ng-click="close(notification)">' +
           '<span class="fa-stack fa-lg">' +
           '<i class="fa fa-circle fa-stack-2x"></i>' +
@@ -2715,7 +2715,7 @@ angular
               }, function () {
 
                 //should validation errors be displayed?
-                var shouldDisplay = form.$aaFormExtensions.$invalidAttempt && form.$invalid;
+                var shouldDisplay = form.$invalid && form.$dirty;
 
                 //not yet... check to see if any fields have and reasons
                 //if there isnt a field then the error must show up

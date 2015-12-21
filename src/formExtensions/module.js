@@ -18,7 +18,7 @@
       //register a notifyConfig to be used by default for displaying validation errors in forms
       //**if this doesn't work for you by all means register a new one with the same key!**
       aaNotifyConfigProvider.addOrUpdateNotifyConfig('aaFormExtensionsValidationErrors', {
-        template: '<div class="alert alert-danger aa-form-extensions-validation-errors">' +
+        template: '<div class="alert alert-danger aa-form-extensions-validation-errors" ng-show="notification.validationErrorsToDisplay().length>0">' +
           '<div class="pull-right aa-notify-close" ng-click="close(notification)">' +
           '<span class="fa-stack fa-lg">' +
           '<i class="fa fa-circle fa-stack-2x"></i>' +
