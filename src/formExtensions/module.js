@@ -19,14 +19,8 @@
       //**if this doesn't work for you by all means register a new one with the same key!**
 			aaNotifyConfigProvider.addOrUpdateNotifyConfig('aaFormExtensionsValidationErrors', {
 				template: '<div class="alert alert-danger aa-form-extensions-validation-errors" ng-show="notification.singleValidationErrorsToDisplay().length>0">' +
-				'<div class="pull-right aa-notify-close" ng-click="close(notification)">' +
-				'<span class="fa-stack fa-lg">' +
-				'<i class="fa fa-circle fa-stack-2x"></i>' +
-				'<i class="fa fa-times fa-stack-1x fa-inverse"></i>' +
-				'</span>' +
-				'</div>' +
 				'<span ng-repeat="error in notification.singleValidationErrorsToDisplay()">' +
-				'<a href="" title="Focus Field" ng-show="error.field" ng-click="notification.showField(error)"><i class="fa fa-search"></i>{{ error.message }}</a>' +
+				'<a href="" title="Focus Field" ng-show="error.field" ng-click="notification.showField(error)">{{ error.message }}</a>' +
 				'<span ng-hide="$last">&nbsp;/&nbsp;</span>' +
 				'</span>' +
 				'</div>',
