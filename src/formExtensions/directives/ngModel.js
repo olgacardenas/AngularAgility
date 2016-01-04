@@ -198,7 +198,26 @@
                     continue;
                   } else if (aaFormExtensions.validationMessages[key]) {
                     //globally registered custom message
-                    msg = aaUtils.stringFormat(aaFormExtensions.validationMessages[key], fieldName);
+                    //push parameters into the error message
+                    var msgParams = [aaFormExtensions.validationMessages[key],fieldName];
+                    var idxMsgParams = [];
+                    var regex = /{(\d+)}/g;
+                    var match = regex.exec(aaFormExtensions.validationMessages[key]);
+                    while (match !== null) {
+                      idxMsgParams.push(match[1]);
+                      match = regex.exec(aaFormExtensions.validationMessages[key]);
+                    }
+                    idxMsgParams.sort(function(a, b){return b-a;});
+                    for(var i = 1; i <= idxMsgParams[0]; i++) {
+                      if(attrs['messageParam' + i]) {
+                        msgParams.push(attrs['messageParam' + i]);
+                      }
+                      else {
+                        msgParams.push('');
+                      }
+                    }
+                  
+                    msg = aaUtils.stringFormat.apply(null, msgParams);
                   } else if (addErrorErrors[key]) {
                     msg = addErrorErrors[key];
                   } else {

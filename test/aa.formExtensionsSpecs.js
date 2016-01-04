@@ -26,5 +26,14 @@ describe('aa.formExtensions.js >', function() {
 
             expect(element.attr('aa-val-msg')).not.toBeDefined();
         }));
+        it('when a parameter {n} is found it does search for its value on message-param-n', inject(function($compile) {
+            element = angular.element('<input type="email" ng-model="current.user.email" aa-field="testEmail" message-param-1="testing">');
+            $compile(form)(scope);
+            scope.exampleForm.$aaFormExtensions.validationMessages = {
+                testingParams : 'this is an example with some {1} param on the field {0}'
+            };
+            scope.exampleForm.$setValidity('testingParams', false);
+            scope.$digest();
+        }));
     });
 });
