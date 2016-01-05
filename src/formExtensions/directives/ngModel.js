@@ -168,7 +168,7 @@
 
             function calcErrorMessages() {
               var fieldErrorMessages = field.$errorMessages,
-                msg;
+                msg = {message: null, isHTML: false};
 
               //clear out the validation messages that exist on *just the field*
               fieldErrorMessages.length = 0;
@@ -181,17 +181,17 @@
                   //the globally registered one or a catchall 'unknown'
                   if (attrs[key + 'Msg']) {
                     //there is a custom message on the element. it wins
-                    msg = aaUtils.stringFormat(attrs[key + 'Msg'], fieldName, attrs[key]);
+                    msg.message = aaUtils.stringFormat(attrs[key + 'Msg'], fieldName, attrs[key]);
                   } else if (key === 'minlength') {
-                    msg = aaUtils.stringFormat(attrs.ngMinlengthMsg || aaFormExtensions.validationMessages.minlength, fieldName, attrs.ngMinlength);
+                    msg.message = aaUtils.stringFormat(attrs.ngMinlengthMsg || aaFormExtensions.validationMessages.minlength, fieldName, attrs.ngMinlength);
                   } else if (key === 'maxlength') {
-                    msg = aaUtils.stringFormat(attrs.ngMaxlengthMsg || aaFormExtensions.validationMessages.maxlength, fieldName, attrs.ngMaxlength);
+                    msg.message = aaUtils.stringFormat(attrs.ngMaxlengthMsg || aaFormExtensions.validationMessages.maxlength, fieldName, attrs.ngMaxlength);
                   } else if (key === 'min') {
-                    msg = aaUtils.stringFormat(attrs.minMsg || aaFormExtensions.validationMessages.min, fieldName, attrs.min);
+                    msg.message = aaUtils.stringFormat(attrs.minMsg || aaFormExtensions.validationMessages.min, fieldName, attrs.min);
                   } else if (key === 'max') {
-                    msg = aaUtils.stringFormat(attrs.maxMsg || aaFormExtensions.validationMessages.max, fieldName, attrs.max);
+                    msg.message = aaUtils.stringFormat(attrs.maxMsg || aaFormExtensions.validationMessages.max, fieldName, attrs.max);
                   } else if (key === 'pattern') {
-                    msg = aaUtils.stringFormat(attrs.ngPatternMsg || aaFormExtensions.validationMessages.pattern, fieldName);
+                    msg.message = aaUtils.stringFormat(attrs.ngPatternMsg || aaFormExtensions.validationMessages.pattern, fieldName);
                   } else if (key === 'required' && element[0].type === 'number' && ngModel.$error.number) {
                     //angular doesn't correctly flag numbers as invalid rather as required when something wrong is filled in
                     //this is fixed in 1.3 but this hack maintains backward/forward compatibility
@@ -217,13 +217,15 @@
                       }
                     }
                   
-                    msg = aaUtils.stringFormat.apply(null, msgParams);
+                    msg.message = aaUtils.stringFormat.apply(null, msgParams);
                   } else if (addErrorErrors[key]) {
-                    msg = addErrorErrors[key];
+                    msg.message = addErrorErrors[key];
                   } else {
                     //unknown what the message should be, use unknown key
-                    msg = aaUtils.stringFormat(aaFormExtensions.validationMessages.unknown, fieldName);
+                    msg.message = aaUtils.stringFormat(aaFormExtensions.validationMessages.unknown, fieldName);
                   }
+
+                  msg.isHTML = /<[a-z][\s\S]*>/i.test(msg.message);
 
                   fieldErrorMessages.push(msg);
                 }
@@ -249,7 +251,8 @@
                 angular.forEach(newErrorMessages, function (msg) {
                   form.$aaFormExtensions.$allValidationErrors.push({
                     field: field,
-                    message: msg
+                    message: msg.message,
+                    isHTML: msg.isHTML
                   });
                 });
               }

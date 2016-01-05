@@ -20,7 +20,8 @@
 			aaNotifyConfigProvider.addOrUpdateNotifyConfig('aaFormExtensionsValidationErrors', {
 				template: '<div class="alert alert-danger aa-form-extensions-validation-errors" ng-show="notification.singleValidationErrorsToDisplay().length>0">' +
 				'<span ng-repeat="error in notification.singleValidationErrorsToDisplay()">' +
-				'<a href="" title="Focus Field" ng-show="error.field" ng-click="notification.showField(error)">{{ error.message }}</a>' +
+				'<a href="" title="Focus Field" ng-show="!error.isHTML && error.field" ng-click="notification.showField(error)">{{ error.message }}</a>' +
+				'<span ng-show="error.isHTML && error.field" ng-bind-html="error.message"></span>' +
 				'<span ng-hide="$last">&nbsp;/&nbsp;</span>' +
 				'</span>' +
 				'</div>',
