@@ -1,5 +1,5 @@
 /*
-angular-agility "version":"0.8.35" @ 2016-01-05T09:50:40
+angular-agility "version":"0.8.35" @ 2016-01-05T14:48:37
 Copyright (c) 2014 - John Culviner
 Licensed under the MIT license
 */
@@ -1008,12 +1008,12 @@ angular
       //**if this doesn't work for you by all means register a new one with the same key!**
 			aaNotifyConfigProvider.addOrUpdateNotifyConfig('aaFormExtensionsValidationErrors', {
 				template: '<div class="alert alert-danger aa-form-extensions-validation-errors" ng-show="notification.singleValidationErrorsToDisplay().length>0">' +
-        '<span ng-repeat="error in notification.singleValidationErrorsToDisplay()">' +
-        '<a href="" title="Focus Field" ng-show="!error.isHTML && error.field" ng-click="notification.showField(error)">{{ error.message }}</a>' +
-        '<span ng-show="error.isHTML && error.field" ng-bind-html="error.message"></span>' +
-        '<span ng-hide="$last">&nbsp;/&nbsp;</span>' +
-        '</span>' +
-        '</div>',
+				'<span ng-repeat="error in notification.singleValidationErrorsToDisplay()">' +
+				'<a href="" title="Focus Field" ng-show="!error.isHTML && error.field" ng-click="notification.showField(error)">{{ error.message }}</a>' +
+				'<span ng-show="error.isHTML && error.field" aa-val-msg-html="{{ error.message }}"></span>' +
+				'<span ng-hide="$last">&nbsp;/&nbsp;</span>' +
+				'</span>' +
+				'</div>',
 				options: {
 					ttl: 0, //forever until manually removed by form extensions
 					showField: function (error) {
@@ -2175,6 +2175,30 @@ angular
       };
     }]);
 
+})();
+;/**
+ * @ngdoc directive
+ * @name aaValMsgHtml
+ *
+ * @description
+ * Description place holder.
+ **/
+(function () {
+  'use strict';
+
+  angular.module('aa.formExtensions')
+    //place on an element with ngModel to generate validation messages containing html tags and javascript
+    .directive('aaValMsgHtml', ['$compile', function ($compile) {
+    	return {
+    		restrict: 'A',
+    		replace: true,
+    		link: function (scope, element, attrs) {
+    			element.html(attrs.aaValMsgHtml);
+    			element.removeAttr('aa-val-msg-html');
+    			$compile(element)(scope);
+    		}
+    	};
+    }]);
 })();
 ;/**
  * @ngdoc directive
