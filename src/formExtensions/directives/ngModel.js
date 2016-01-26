@@ -167,13 +167,14 @@
               }, true);
 
             function calcErrorMessages() {
-              var fieldErrorMessages = field.$errorMessages,
-                msg = {message: null, isHTML: false};
+              var fieldErrorMessages = field.$errorMessages, msg = {};
 
               //clear out the validation messages that exist on *just the field*
               fieldErrorMessages.length = 0;
 
               for (var key in ngModel.$error) {
+                msg = {message: null, isHTML: false};
+
                 if (ngModel.$error[key]) {
 
                   //for each possible validation message check if there is a custom
